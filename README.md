@@ -29,6 +29,28 @@ services:
     network_mode: "host"
     privileged: true
 ```
+## Creating the image
+
+```
+docker build -t homeassistant-tellstick .
+```
+
+
+## Configuration of Home Assistant Network
+`server_host` the docker network hostname
+`trusted_proxies`: all hosts that the Home Assistant server is supposed to be reachable on.
+
+```
+http:
+  server_host: homeassistant
+  login_attempts_threshold: 10
+  ip_ban_enabled: True
+  use_x_forwarded_for: True
+  trusted_proxies:
+    - 10.169.77.141
+    - 10.169.77.93
+
+```
 
 ## Configuration of Tellstick
 

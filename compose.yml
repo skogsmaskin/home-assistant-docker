@@ -1,0 +1,22 @@
+version: '3'
+services:
+  homeassistant:
+    hostname: homeassistant
+    container_name: homeassistant-tellstick
+    image: "homeassistant-tellstick:latest"
+    volumes:
+      - config:/config
+      - /etc/tellstick.conf:/etc/tellstick.conf
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+    restart: unless-stopped
+    privileged: true
+    network_mode: bridge
+    devices:
+      - /dev/bus/usb/001/008 # Tellstick Duo
+      - /dev/bus/usb/001/007 # IRToy
+    ports:
+      - "8123:8123"
+
+volumes:
+  config:
